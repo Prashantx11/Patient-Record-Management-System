@@ -1,211 +1,175 @@
-# hospital-app
+# Patient Record Management System
 
-Hospital Record Management System (HRMS)
+## Description
 
-Overview
+This repository contains a Patient Record Management System, a cryptographic application designed to securely manage patient data. The system utilizes JavaScript, Express.js, and Node.js to provide a backend for handling patient records with enhanced security measures. This includes cryptographic techniques for data encryption and secure storage.
 
-The Hospital Record Management System (HRMS) is a secure, PKI-based application designed to manage electronic Protected Health Information (ePHI) with robust security features. Built to comply with HIPAA standards, it enables administrators to authenticate using digital certificates, sign patient records with RSA signatures, and encrypt data with AES-256. Patients access their records via QR codes with a three-attempt lockout mechanism. This project was developed locally on a Mac using VSCode and is containerized with Docker for consistent deployment.
+## Key Features & Benefits
 
-Features
+- **Secure Patient Data Management:** Employs cryptographic techniques to ensure the confidentiality and integrity of patient records.
+- **Backend API:** Provides a robust backend API built with Express.js for handling patient record operations.
+- **Node.js Environment:** Leverages the Node.js runtime for efficient and scalable server-side operations.
+- **Database Integration:** Utilizes MongoDB (through Mongoose) for persistent storage of patient data.
+- **File Uploads:** Supports the uploading and secure storage of patient-related documents.
 
+## Prerequisites & Dependencies
 
+Before you begin, ensure you have met the following requirements:
 
+- **Node.js:**  Make sure Node.js is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
+- **npm:** Node Package Manager, which comes with Node.js.
+- **MongoDB:** A running instance of MongoDB for data storage.  You can download it from [mongodb.com](https://www.mongodb.com/).
+- **Frontend Dependencies**: Have a modern browser such as Chrome or Firefox for running the frontend application.
 
+**Backend Dependencies (install in the `backend` directory):**
 
-Certificate-Based Authentication: Admins log in using X.509 certificates verified against a trusted CA.
+```bash
+npm install express mongoose cors multer dotenv qrcode bcrypt crypto-js
+```
 
+**Frontend Dependencies (install in the `frontend` directory):**
 
+```bash
+npm install axios qrcode.react react react-dom react-router-dom tailwindcss autoprefixer postcss jsqr
+```
 
-RSA Signatures: Ensures record integrity and non-repudiation.
+## Installation & Setup Instructions
 
+Follow these steps to get the project running on your local machine:
 
+1.  **Clone the Repository:**
 
-AES-256 Encryption: Secures patient records stored in MongoDB.
+    ```bash
+    git clone https://github.com/Prashantx11/Patient-Record-Management-System.git
+    cd Patient-Record-Management-System
+    ```
 
+2.  **Backend Setup:**
 
+    *   Navigate to the `backend` directory:
 
-QR Code Access with Lockout: Patients scan QR codes to access records, with a three-attempt limit.
+        ```bash
+        cd backend
+        ```
 
+    *   Install the required Node.js packages:
 
+        ```bash
+        npm install
+        ```
 
-HIPAA Compliance: Protects ePHI with encryption and access controls.
+    *   Create a `.env` file in the `backend` directory and configure your environment variables.  Here is an example `.env` file:
 
-Technologies Used
+        ```
+        PORT=3001
+        MONGODB_URI=mongodb://localhost:27017/hospitalDB
+        ```
 
+    *   Start the backend server:
 
+        ```bash
+        npm start
+        ```
 
+3.  **Frontend Setup:**
 
+    *   Navigate to the `frontend` directory:
 
-Backend: Node.js v18.20.8, Express
+        ```bash
+        cd ../frontend
+        ```
 
+    *   Install the required Node.js packages:
 
+        ```bash
+        npm install
+        ```
 
-Frontend: React v18.2.0, Tailwind CSS
+    *   Start the frontend development server:
 
+        ```bash
+        npm start
+        ```
 
+        This will usually open the application in your default web browser at `http://localhost:3000`.
 
-Database: MongoDB 8.0
+## Configuration Options
 
+- **Backend Configuration:**
+  - **Port:** The backend server port is configurable through the `PORT` environment variable in the `.env` file.
+  - **MongoDB URI:** The MongoDB connection string can be set via the `MONGODB_URI` environment variable in the `.env` file.
+- **Frontend Configuration:**
+  - The frontend uses environment variables (prefixed with `REACT_APP_`) for configuration. These can be set in a `.env` file in the `frontend` directory.
 
+## Project Structure
 
-Security: node-forge (for PKI), crypto (for AES-256)
+```
+├── .gitattributes
+├── README.md
+├── backend
+│   ├── .env
+│   ├── initDB.js
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── server.js
+│   └── uploads
+│       └── [Example Uploaded File].png
+└── frontend
+    ├── node_modules
+    ├── package-lock.json
+    ├── package.json
+    ├── postcss.config.js
+    ├── public
+    │   └── index.html
+    ├── src
+    │   ├── App.css
+    │   ├── App.jsx
+    │   └── index.js
+    └── tailwind.config.js
+```
 
+## Important Files
 
+### `README.md`
 
-Utilities: jsqr (QR scanning), Docker (deployment)
+Provides project overview and setup instructions.
 
-Prerequisites
+### `backend/initDB.js`
 
+Script for initializing the database with default data.  It connects to MongoDB, defines a schema for a user, and creates new users (if they do not already exist).  This file is used for initial setup and seeding the database.
 
+### `backend/package.json`
 
+Contains project metadata and dependencies for the backend.  Key dependencies include `express`, `mongoose`, `multer`, `cors`, `dotenv`, `qrcode`, `bcrypt`, and `crypto-js`.
 
+### `backend/server.js`
 
-Node.js v18.20.8
+The main entry point for the backend server. It sets up the Express.js server, configures middleware, defines API endpoints for handling patient records, and integrates with MongoDB.
 
+### `frontend/package.json`
 
+Contains project metadata and dependencies for the frontend.  Key dependencies include `axios`, `qrcode.react`, `react`, `react-dom`, `react-router-dom`, `tailwindcss`, `autoprefixer`, `postcss`, and `jsqr`.
 
-MongoDB 8.0
+## Contributing Guidelines
 
+Contributions are welcome! Here's how you can contribute:
 
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Make your changes and test thoroughly.
+4.  Submit a pull request with a clear description of your changes.
 
-Docker Desktop
+## License Information
 
+This project does not currently specify a license. All rights are reserved.
 
+## Acknowledgments
 
-Git
-
-
-
-VSCode (recommended)
-
-Installation
-
-
-
-
-
-Clone the Repository:
-
-git clone https://github.com/your-username/hrms.git
-cd hrms
-
-
-
-Install Dependencies:
-
-
-
-
-
-Backend: cd backend && npm install
-
-
-
-Frontend: cd frontend && npm install
-
-
-
-Set Up Environment Variables:
-
-
-
-
-
-Create a .env file in the backend directory with:
-
-MONGODB_URI=mongodb://localhost:27017/hrs_db
-CA_CERT_PATH=/path/to/ca.crt
-
-
-
-Update paths as needed.
-
-
-
-Install MongoDB and Start Service:
-
-brew tap mongodb/brew
-brew install mongodb-community@8.0
-brew services start mongodb/brew/mongodb-community
-
-
-
-Run with Docker:
-
-docker-compose up --build
-
-Usage
-
-
-
-
-
-Admin Access: Open http://localhost:3000/admin in your browser, upload your X.509 certificate and key, and log in to manage records.
-
-
-
-Patient Access: Open http://localhost:3000/patient, scan the QR code provided by the admin, and enter the ticket ID to view records.
-
-
-
-Security Note: Ensure your CA certificate is trusted and stored securely.
-
-Development
-
-
-
-
-
-Developed locally on a Mac using VSCode.
-
-
-
-Follows an iterative methodology with phases: Setup, Backend, Frontend, Integration, Testing.
-
-
-
-Git is used for version control; issues are tracked via GitHub Issues.
-
-Contributing
-
-
-
-
-
-Fork the repository.
-
-
-
-Create a feature branch: git checkout -b feature-name.
-
-
-
-Commit changes: git commit -m "Add feature-name".
-
-
-
-Push to the branch: git push origin feature-name.
-
-
-
-Submit a pull request.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Contact
-
-For questions or support, contact [Your Name] at [your-email@example.com].
-
-Acknowledgments
-
-
-
-
-
-Thanks to the open-source communities for Node.js, React, MongoDB, and Docker.
-
-
-
-Special appreciation to xAI for supporting this development journey.
+*   This project utilizes the following open-source libraries and frameworks:
+    *   Express.js
+    *   Node.js
+    *   MongoDB
+    *   React
+    *   Tailwind CSS
+*   Special thanks to the contributors of these libraries for their valuable work.
